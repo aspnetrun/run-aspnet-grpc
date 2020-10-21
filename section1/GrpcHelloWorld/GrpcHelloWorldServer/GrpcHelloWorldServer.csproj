@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Protobuf Include="Protos\hello.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

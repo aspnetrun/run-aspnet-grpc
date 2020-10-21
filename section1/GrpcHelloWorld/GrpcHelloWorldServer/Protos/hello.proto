@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "GrpcHelloWorldServer";
 
-package helloworld
+package helloworld;
 
 service HelloService {
 	rpc SayHello (HelloRequest) returns (HelloResponse);
