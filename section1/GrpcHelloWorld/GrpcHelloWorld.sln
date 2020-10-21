@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcHelloWorldServer", "GrpcHelloWorldServer\GrpcHelloWorldServer.csproj", "{B6A960AF-E244-4773-859B-D99108B6AE18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gRPCHelloWorldClient", "gRPCHelloWorldClient\gRPCHelloWorldClient.csproj", "{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B6A960AF-E244-4773-859B-D99108B6AE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6A960AF-E244-4773-859B-D99108B6AE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6A960AF-E244-4773-859B-D99108B6AE18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
