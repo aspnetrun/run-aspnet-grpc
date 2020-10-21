@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcHelloWorldServer", "Grp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gRPCHelloWorldClient", "gRPCHelloWorldClient\gRPCHelloWorldClient.csproj", "{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcGreeter", "GrpcGreeter\GrpcGreeter.csproj", "{8E3F1FE5-D2DD-4E8D-A40C-473CE59CAB00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcGreeterClient", "GrpcGreeterClient\GrpcGreeterClient.csproj", "{196888C9-C190-45C2-9E79-1B34D2F700CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FE65BF1-F259-46D2-9FD3-39D7F0A231E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E3F1FE5-D2DD-4E8D-A40C-473CE59CAB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E3F1FE5-D2DD-4E8D-A40C-473CE59CAB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E3F1FE5-D2DD-4E8D-A40C-473CE59CAB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E3F1FE5-D2DD-4E8D-A40C-473CE59CAB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{196888C9-C190-45C2-9E79-1B34D2F700CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196888C9-C190-45C2-9E79-1B34D2F700CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196888C9-C190-45C2-9E79-1B34D2F700CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196888C9-C190-45C2-9E79-1B34D2F700CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
