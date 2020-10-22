@@ -9,10 +9,11 @@ namespace ProductGrpcClient
     {
         static async Task Main(string[] args)
         {
-            // The port number(5001) must match the port of the gRPC server.
+            
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new ProductProtoService.ProductProtoServiceClient(channel);
 
+            // GetProduct
             var response = await client.GetProductAsync(
                                 new GetProductRequest
                                 {
@@ -20,8 +21,8 @@ namespace ProductGrpcClient
                                 });
             
             Console.WriteLine("Greeting: " + response.ToString());
-            //Console.ReadLine();
-            
+
+            // GetAllProducts
             using (var clientData = client.GetAllProducts(new GetAllProductsRequest()))
             {
                 while (await clientData.ResponseStream.MoveNext(new System.Threading.CancellationToken()))
