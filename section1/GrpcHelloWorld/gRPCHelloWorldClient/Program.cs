@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace gRPCHelloWorldClient
+namespace GrpcHelloWorldClient
 {
     class Program
     {
