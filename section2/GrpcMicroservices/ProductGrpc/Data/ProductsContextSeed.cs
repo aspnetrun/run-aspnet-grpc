@@ -22,6 +22,24 @@ namespace ProductGrpc.Data
                         Price = 699,
                         Status = ProductGrpc.Models.ProductStatus.INSTOCK,
                         CreateTime = DateTime.UtcNow
+                    },
+                    new Product
+                    {
+                        Id = 2,
+                        Name = "P40",
+                        Description = "New Huawei Phone P40",
+                        Price = 899,
+                        Status = ProductGrpc.Models.ProductStatus.INSTOCK,
+                        CreateTime = DateTime.UtcNow
+                    },
+                    new Product
+                    {
+                        Id = 3,
+                        Name = "A50",
+                        Description = "New Samsung Phone A50",
+                        Price = 399,
+                        Status = ProductGrpc.Models.ProductStatus.INSTOCK,
+                        CreateTime = DateTime.UtcNow
                     }
                 };
                 productsContext.Product.AddRange(products);
