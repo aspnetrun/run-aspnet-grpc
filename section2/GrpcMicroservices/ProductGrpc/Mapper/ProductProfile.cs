@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
+using Google.Protobuf.WellKnownTypes;
 using ProductProtoGrpc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductGrpc.Mapper
 {
@@ -11,7 +8,13 @@ namespace ProductGrpc.Mapper
     {
         public ProductProfile()
         {
-            CreateMap<Models.Product, ProductModel>().ReverseMap();
+            CreateMap<Models.Product, ProductModel>()
+                .ForMember(dest => dest.CreatedTime, opt => opt.MapFrom(src => Timestamp.FromDateTime(src.CreatedTime)));
+
+            CreateMap<ProductModel, Models.Product>()
+                .ForMember(dest => dest.CreatedTime, opt => opt.MapFrom(src => src.CreatedTime.ToDateTime()));                
+
+            // note : not use reverseMap. Timestamp should be converted manually.
         }
     }
 }

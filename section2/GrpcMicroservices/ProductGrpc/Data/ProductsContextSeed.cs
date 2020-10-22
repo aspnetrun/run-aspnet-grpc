@@ -21,7 +21,7 @@ namespace ProductGrpc.Data
                         Description = "New Xiaomi Phone Mi10T",
                         Price = 699,
                         Status = ProductGrpc.Models.ProductStatus.INSTOCK,
-                        CreateTime = DateTime.UtcNow
+                        CreatedTime = DateTime.UtcNow
                     },
                     new Product
                     {
@@ -30,7 +30,7 @@ namespace ProductGrpc.Data
                         Description = "New Huawei Phone P40",
                         Price = 899,
                         Status = ProductGrpc.Models.ProductStatus.INSTOCK,
-                        CreateTime = DateTime.UtcNow
+                        CreatedTime = DateTime.UtcNow
                     },
                     new Product
                     {
@@ -39,7 +39,7 @@ namespace ProductGrpc.Data
                         Description = "New Samsung Phone A50",
                         Price = 399,
                         Status = ProductGrpc.Models.ProductStatus.INSTOCK,
-                        CreateTime = DateTime.UtcNow
+                        CreatedTime = DateTime.UtcNow
                     }
                 };
                 productsContext.Product.AddRange(products);

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProductGrpc.Data;
+using ProductGrpc.Models;
 using ProductProtoGrpc;
 using System;
 using System.Collections.Generic;
@@ -79,19 +80,59 @@ namespace ProductGrpc.Services
             }
         }
 
-        public override Task<ProductModel> AddProduct(AddProductRequest request, ServerCallContext context)
+        public override async Task<ProductModel> AddProduct(AddProductRequest request, ServerCallContext context)
         {
-            return base.AddProduct(request, context);
+            var product = _mapper.Map<Product>(request.Product);
+
+            _productDbContext.Product.Add(product);
+            await _productDbContext.SaveChangesAsync();
+
+            var productModel = _mapper.Map<ProductModel>(product);
+            return productModel;
         }
 
-        public override Task<ProductModel> UpdateProduct(UpdateProductRequest request, ServerCallContext context)
+        public override async Task<ProductModel> UpdateProduct(UpdateProductRequest request, ServerCallContext context)
         {
-            return base.UpdateProduct(request, context);
+            var product = _mapper.Map<Product>(request.Product);
+
+            bool isExist = await _productDbContext.Product.AnyAsync(p => p.Id == product.Id);
+            if (!isExist)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={product.Id} is not found."));
+            }
+
+            _productDbContext.Entry(product).State = EntityState.Modified;
+
+            try
+            {
+                await _productDbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            var productModel = _mapper.Map<ProductModel>(product);
+            return productModel;
         }
 
-        public override Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request, ServerCallContext context)
+        public override async Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request, ServerCallContext context)
         {
-            return base.DeleteProduct(request, context);
+            var product = await _productDbContext.Product.FindAsync(request.ProductId);
+            if (product == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={request.ProductId} is not found."));
+            }
+
+            _productDbContext.Product.Remove(product);
+            var deleteCount = await _productDbContext.SaveChangesAsync();
+
+            var response = new DeleteProductResponse
+            {
+                Success = deleteCount > 0
+            };
+
+            return response;
         }
 
     }

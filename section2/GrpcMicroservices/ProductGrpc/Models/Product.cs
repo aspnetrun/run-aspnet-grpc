@@ -9,7 +9,7 @@ namespace ProductGrpc.Models
         public string Description { get; set; }
         public float Price { get; set; }
         public ProductStatus Status { get; set; }
-        public DateTime CreateTime { get; set; }
+        public DateTime CreatedTime { get; set; }
     }
 
     public enum ProductStatus
