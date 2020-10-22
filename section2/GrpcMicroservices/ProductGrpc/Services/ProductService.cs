@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Logging;
 using ProductGrpc.Data;
 using System;
@@ -28,21 +29,22 @@ namespace ProductGrpc.Services
         public override async Task<ProductModel> GetProduct(GetProductRequest request, ServerCallContext context)
         {
             var product = await _context.Product.FindAsync(request.ProductId);
-            if(null != product)
+            if (product == null)
             {
-                var productModel = new ProductModel
-                {
-                    ProductId = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Status = ProductStatus.Instock,
-                    CreatedTime = Timestamp.FromDateTime(product.CreateTime)
-                };
-
-                return productModel;
+                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={request.ProductId} is not found."));
             }
-            return null;
+            
+            var productModel = new ProductModel
+            {
+                ProductId = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Status = ProductStatus.Instock,
+                CreatedTime = Timestamp.FromDateTime(product.CreateTime)
+            };
+
+            return productModel;                        
         }
 
         public override Task GetAllProducts(GetAllProductsRequest request, IServerStreamWriter<ProductModel> responseStream, ServerCallContext context)

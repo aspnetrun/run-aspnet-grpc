@@ -11,21 +11,6 @@ namespace ProductGrpc.Data
         {
         }
 
-        public DbSet<Product> Product { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>().HasData(
-                new Product
-                {
-                    Id = 1,
-                    Name = "Mi10T",
-                    Description = "New Xiaomi Phone Mi10T",
-                    Price = 699,
-                    Status = ProductGrpc.Models.ProductStatus.INSTOCK,
-                    CreateTime = DateTime.UtcNow
-                }
-            );
-        }
+        public DbSet<Product> Product { get; set; }        
     }
 }

@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProductGrpc.Data;
 
 namespace ProductGrpc
 {
@@ -12,7 +9,9 @@ namespace ProductGrpc
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            SeedDatabase(host);
+            host.Run();            
         }
 
         // Additional configuration is required to successfully run gRPC on macOS.
@@ -23,5 +22,15 @@ namespace ProductGrpc
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void SeedDatabase(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var moviesContext = services.GetRequiredService<ProductsContext>();
+                ProductsContextSeed.SeedAsync(moviesContext);
+            }
+        }
     }
 }
