@@ -5,14 +5,9 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpc", "ProductGrpc\ProductGrpc.csproj", "{FC66ECF5-E390-49C9-8F6A-0F8FF8E056BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protos", "Protos", "{438B81CF-F145-43C7-BF71-34CA73CE2261}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A8826AC-6933-42EA-A181-0EDB1F36F926}"
 	ProjectSection(SolutionItems) = preProject
-		ProductGrpc\Protos\greet.proto = ProductGrpc\Protos\greet.proto
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "asdf", "asdf", "{65BADF28-9969-4018-A5F9-BA126E51FAC3}"
-	ProjectSection(SolutionItems) = preProject
-		TextFile1.txt = TextFile1.txt
+		Protos\product.proto = Protos\product.proto
 	EndProjectSection
 EndProject
 Global
