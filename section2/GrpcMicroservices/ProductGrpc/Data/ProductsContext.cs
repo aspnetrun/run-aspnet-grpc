@@ -22,7 +22,7 @@ namespace ProductGrpc.Data
                     Name = "Mi10T",
                     Description = "New Xiaomi Phone Mi10T",
                     Price = 699,
-                    Status = ProductStatus.INSTOCK,
+                    Status = ProductGrpc.Models.ProductStatus.INSTOCK,
                     CreateTime = DateTime.UtcNow
                 }
             );
