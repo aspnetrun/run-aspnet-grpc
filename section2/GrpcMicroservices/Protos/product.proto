@@ -2,10 +2,13 @@ syntax = "proto3";
 
 option csharp_namespace = "ProductGrpc";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
 package productgrpc;
 
-service Product {
-  rpc GetProduct (GetProductRequest) returns (ProductModel);  
+service ProductProtoService {
+  rpc GetProduct (GetProductRequest) returns (ProductModel);
   rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductModel);
 
   rpc AddProduct (AddProductRequest) returns (ProductModel);
@@ -15,7 +18,7 @@ service Product {
   rpc Test (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
-message GetProductByIdRequest {
+message GetProductRequest {
   int32 productId = 1;
 }
 

@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductGrpc.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductGrpc.Data
 {
@@ -22,8 +19,11 @@ namespace ProductGrpc.Data
                 new Product
                 {
                     Id = 1,
-                    Name = "William",
-                    Description = "Shakespeare"
+                    Name = "Mi10T",
+                    Description = "New Xiaomi Phone Mi10T",
+                    Price = 699,
+                    Status = ProductStatus.INSTOCK,
+                    CreateTime = DateTime.UtcNow
                 }
             );
         }
