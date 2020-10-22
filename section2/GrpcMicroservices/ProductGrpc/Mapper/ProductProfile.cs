@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
-using ProductProtoGrpc;
+using ProductGrpc.Protos;
 
 namespace ProductGrpc.Mapper
 {

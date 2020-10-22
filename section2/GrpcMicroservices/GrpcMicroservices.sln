@@ -3,14 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpc", "ProductGrpc\ProductGrpc.csproj", "{FC66ECF5-E390-49C9-8F6A-0F8FF8E056BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductGrpc", "ProductGrpc\ProductGrpc.csproj", "{FC66ECF5-E390-49C9-8F6A-0F8FF8E056BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protos", "Protos", "{5C0C66AB-7601-4ABF-9FE1-ECF44396D0D2}"
-	ProjectSection(SolutionItems) = preProject
-		Protos\product.proto = Protos\product.proto
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpcClient", "ProductGrpcClient\ProductGrpcClient.csproj", "{B48E1E8D-3F9D-4359-81A0-9A03CFA2A546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductGrpcClient", "ProductGrpcClient\ProductGrpcClient.csproj", "{B48E1E8D-3F9D-4359-81A0-9A03CFA2A546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,11 +1,9 @@
 syntax = "proto3";
 
-option csharp_namespace = "ProductProtoGrpc";
+option csharp_namespace = "ProductGrpc.Protos";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
-
-package productprotogrpc;
 
 service ProductProtoService {
   rpc GetProduct (GetProductRequest) returns (ProductModel);
@@ -55,5 +53,3 @@ enum ProductStatus {
 	LOW = 1;
 	NONE = 2;
 }
-
-

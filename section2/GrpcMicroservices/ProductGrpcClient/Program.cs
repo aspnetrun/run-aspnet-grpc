@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
-using ProductProtoGrpc;
+using ProductGrpc.Protos;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
