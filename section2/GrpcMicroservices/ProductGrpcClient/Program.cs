@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using Grpc.Net.Client;
 using ProductGrpc.Protos;
 using System;
@@ -27,7 +28,6 @@ namespace ProductGrpcClient
                                 });
             
             Console.WriteLine("GetProductAsync Response: " + response.ToString());
-
             Thread.Sleep(1000);
 
             // GetAllProducts
@@ -40,7 +40,15 @@ namespace ProductGrpcClient
                     Console.WriteLine(currentProduct);
                 }
             }
+            Thread.Sleep(1000);
 
+            // GetAllProducts with C# 8
+            Console.WriteLine("GetAllProducts with C#8 started...");                        
+            using var clientData2 = client.GetAllProducts(new GetAllProductsRequest());
+            await foreach (var responseData in clientData2.ResponseStream.ReadAllAsync())
+            {
+                Console.WriteLine(responseData);
+            }
             Thread.Sleep(1000);
 
             // AddProductAsync
@@ -59,8 +67,8 @@ namespace ProductGrpcClient
                                 });
 
             Console.WriteLine("AddProduct Response: " + addProductResponse.ToString());
-
             Thread.Sleep(1000);
+
             Console.WriteLine("UpdateProductAsync started...");
             var updateProductResponse = await client.UpdateProductAsync(
                                  new UpdateProductRequest
@@ -77,8 +85,8 @@ namespace ProductGrpcClient
                                  });
 
             Console.WriteLine("UpdateProductAsync Response: " + updateProductResponse.ToString());
-
             Thread.Sleep(1000);
+
             Console.WriteLine("DeleteProductAsync started...");
             var deleteProductResponse = await client.DeleteProductAsync(
                                  new DeleteProductRequest
@@ -87,18 +95,14 @@ namespace ProductGrpcClient
                                  });
 
             Console.WriteLine("DeleteProductAsync Response: " + deleteProductResponse.Success.ToString());
-
             Thread.Sleep(1000);
 
-            // GetAllProducts
-            Console.WriteLine("GetAllProducts started...");
-            using (var clientData = client.GetAllProducts(new GetAllProductsRequest()))
+            // GetAllProducts with C# 8
+            Console.WriteLine("GetAllProducts with C#8 started...");            
+            using var clientData3 = client.GetAllProducts(new GetAllProductsRequest());
+            await foreach (var responseData in clientData3.ResponseStream.ReadAllAsync())
             {
-                while (await clientData.ResponseStream.MoveNext(new System.Threading.CancellationToken()))
-                {
-                    var currentProduct = clientData.ResponseStream.Current;
-                    Console.WriteLine(currentProduct);
-                }
+                Console.WriteLine(responseData);
             }
 
             Console.WriteLine("Press any key to exit...");
