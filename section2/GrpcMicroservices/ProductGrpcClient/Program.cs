@@ -69,6 +69,7 @@ namespace ProductGrpcClient
             Console.WriteLine("AddProduct Response: " + addProductResponse.ToString());
             Thread.Sleep(1000);
 
+            // UpdateProductAsync
             Console.WriteLine("UpdateProductAsync started...");
             var updateProductResponse = await client.UpdateProductAsync(
                                  new UpdateProductRequest
@@ -87,6 +88,7 @@ namespace ProductGrpcClient
             Console.WriteLine("UpdateProductAsync Response: " + updateProductResponse.ToString());
             Thread.Sleep(1000);
 
+            // DeleteProductAsync
             Console.WriteLine("DeleteProductAsync started...");
             var deleteProductResponse = await client.DeleteProductAsync(
                                  new DeleteProductRequest
@@ -101,6 +103,30 @@ namespace ProductGrpcClient
             Console.WriteLine("GetAllProducts with C#8 started...");            
             using var clientData3 = client.GetAllProducts(new GetAllProductsRequest());
             await foreach (var responseData in clientData3.ResponseStream.ReadAllAsync())
+            {
+                Console.WriteLine(responseData);
+            }
+            Thread.Sleep(1000);
+
+            // InsertBulkProduct
+            Console.WriteLine("InsertBulkProduct started...");
+            using var clientBulk = client.InsertBulkProduct();
+
+            for(var i = 0; i < 3; i++)
+{
+                await clientBulk.RequestStream.WriteAsync(new ProductModel { Name = $"Product{i}" });
+            }
+            await clientBulk.RequestStream.CompleteAsync();
+
+            var responseBulk = await clientBulk;
+            Console.WriteLine($"Status: {responseBulk.Success}. Items: {responseBulk.ProductItems}");
+            // InsertBulkProduct end
+            Thread.Sleep(1000);
+
+            // GetAllProducts with C# 8
+            Console.WriteLine("GetAllProducts with C#8 started...");
+            using var clientData4 = client.GetAllProducts(new GetAllProductsRequest());
+            await foreach (var responseData in clientData4.ResponseStream.ReadAllAsync())
             {
                 Console.WriteLine(responseData);
             }

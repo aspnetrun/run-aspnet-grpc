@@ -13,6 +13,8 @@ service ProductProtoService {
   rpc UpdateProduct (UpdateProductRequest) returns (ProductModel);
   rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse);
 
+  rpc InsertBulkProduct (stream ProductModel) returns (InsertBulkProductResponse);
+
   rpc Test (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
@@ -37,6 +39,11 @@ message DeleteProductRequest {
 
 message DeleteProductResponse {
   bool success = 1;
+}
+
+message InsertBulkProductResponse {
+  bool success = 1;
+  repeated ProductModel productItems = 2;
 }
 
 message ProductModel{

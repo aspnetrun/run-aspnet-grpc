@@ -7,6 +7,7 @@ using ProductGrpc.Data;
 using ProductGrpc.Models;
 using ProductGrpc.Protos;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProductGrpc.Services
@@ -127,6 +128,26 @@ namespace ProductGrpc.Services
             var response = new DeleteProductResponse
             {
                 Success = deleteCount > 0
+            };
+
+            return response;
+        }
+
+        public override async Task<InsertBulkProductResponse> InsertBulkProduct(IAsyncStreamReader<ProductModel> requestStream, ServerCallContext context)
+        {
+            // https://csharp.hotexamples.com/examples/-/IAsyncStreamReader/-/php-iasyncstreamreader-class-examples.html
+
+            while (await requestStream.MoveNext())
+            {
+                var product = _mapper.Map<Product>(requestStream.Current);
+                _productDbContext.Product.Add(product);    
+            }
+
+            var insertCount = await _productDbContext.SaveChangesAsync();
+
+            var response = new InsertBulkProductResponse
+            {
+                Success = insertCount > 0
             };
 
             return response;
