@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "ProductGrpc";
+
+package productgrpc;
+
+service Product {  
+  rpc GetProduct (GetProductRequest) returns (ProductModel);  
+  rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductModel);
+
+  rpc AddProduct (AddProductRequest) returns (ProductModel);
+  rpc UpdateProduct (UpdateProductRequest) returns (ProductModel);
+  rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse);
+
+  rpc Test (google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+message GetProductByIdRequest {
+  int32 productId = 1;
+}
+
+message GetAllProductsRequest{
+}
+
+message ProductModel{
+	int32 productId = 1;
+	string name = 2;
+	string description = 3;	
+	float price = 4;
+	ProductStatus status = 5;
+	google.protobuf.Timestamp createdTime = 6;
+}
+
+enum ProductStatus {
+	INSTOCK = 0;
+	LOW = 1;
+	NONE = 2;
+}
+
+
