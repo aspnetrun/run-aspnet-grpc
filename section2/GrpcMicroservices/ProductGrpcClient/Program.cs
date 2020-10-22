@@ -12,6 +12,7 @@ namespace ProductGrpcClient
         static async Task Main(string[] args)
         {
             // wait for server is running
+            Console.WriteLine("Waiting for server is running");
             Thread.Sleep(2000);
 
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -59,6 +60,46 @@ namespace ProductGrpcClient
 
             Console.WriteLine("AddProduct Response: " + addProductResponse.ToString());
 
+            Thread.Sleep(1000);
+            Console.WriteLine("UpdateProductAsync started...");
+            var updateProductResponse = await client.UpdateProductAsync(
+                                 new UpdateProductRequest
+                                 {
+                                     Product = new ProductModel
+                                     {
+                                         ProductId = 1,
+                                         Name = "Red",
+                                         Description = "New Red Phone Mi10T",
+                                         Price = 699,
+                                         Status = ProductStatus.Instock,
+                                         CreatedTime = Timestamp.FromDateTime(DateTime.UtcNow)
+                                     }
+                                 });
+
+            Console.WriteLine("UpdateProductAsync Response: " + updateProductResponse.ToString());
+
+            Thread.Sleep(1000);
+            Console.WriteLine("DeleteProductAsync started...");
+            var deleteProductResponse = await client.DeleteProductAsync(
+                                 new DeleteProductRequest
+                                 {
+                                     ProductId = 3                                     
+                                 });
+
+            Console.WriteLine("DeleteProductAsync Response: " + deleteProductResponse.Success.ToString());
+
+            Thread.Sleep(1000);
+
+            // GetAllProducts
+            Console.WriteLine("GetAllProducts started...");
+            using (var clientData = client.GetAllProducts(new GetAllProductsRequest()))
+            {
+                while (await clientData.ResponseStream.MoveNext(new System.Threading.CancellationToken()))
+                {
+                    var currentProduct = clientData.ResponseStream.Current;
+                    Console.WriteLine(currentProduct);
+                }
+            }
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();

@@ -95,10 +95,10 @@ namespace ProductGrpc.Services
         {
             var product = _mapper.Map<Product>(request.Product);
 
-            bool isExist = await _productDbContext.Product.AnyAsync(p => p.Id == product.Id);
+            bool isExist = await _productDbContext.Product.AnyAsync(p => p.ProductId == product.ProductId);
             if (!isExist)
             {
-                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={product.Id} is not found."));
+                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={product.ProductId} is not found."));
             }
 
             _productDbContext.Entry(product).State = EntityState.Modified;
