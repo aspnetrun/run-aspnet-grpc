@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProductGrpc.Data;
+using ProductProtoGrpc;
 using System;
 using System.Collections.Generic;
 using System.Linq;

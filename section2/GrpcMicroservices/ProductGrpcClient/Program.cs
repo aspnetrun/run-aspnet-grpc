@@ -1,5 +1,5 @@
 ﻿using Grpc.Net.Client;
-using ProductGrpc;
+using ProductProtoGrpc;
 using System;
 using System.Threading.Tasks;
 
