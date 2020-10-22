@@ -4,7 +4,7 @@ option csharp_namespace = "ProductGrpc";
 
 package productgrpc;
 
-service Product {  
+service Product {
   rpc GetProduct (GetProductRequest) returns (ProductModel);  
   rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductModel);
 
@@ -20,6 +20,22 @@ message GetProductByIdRequest {
 }
 
 message GetAllProductsRequest{
+}
+
+message AddProductRequest {
+  ProductModel product = 1;
+}
+
+message UpdateProductRequest {
+  ProductModel product = 1;
+}
+
+message DeleteProductRequest {
+  int32 productId = 1;
+}
+
+message DeleteProductResponse {
+  bool success = 1;
 }
 
 message ProductModel{
