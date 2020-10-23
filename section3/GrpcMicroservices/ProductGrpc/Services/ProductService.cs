@@ -7,7 +7,6 @@ using ProductGrpc.Data;
 using ProductGrpc.Models;
 using ProductGrpc.Protos;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProductGrpc.Services
@@ -38,19 +37,7 @@ namespace ProductGrpc.Services
             {
                 throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={request.ProductId} is not found."));
             }
-
-            //var productModel = new ProductModel
-            //{
-            //    ProductId = product.Id,
-            //    Name = product.Name,
-            //    Description = product.Description,
-            //    Price = product.Price,
-            //    Status = ProductStatus.Instock,
-            //    CreatedTime = Timestamp.FromDateTime(product.CreateTime)
-            //};
-
             var productModel = _mapper.Map<ProductModel>(product);
-
             return productModel;                        
         }
 
@@ -59,21 +46,9 @@ namespace ProductGrpc.Services
                                                     ServerCallContext context)
         {
             var productList = await _productDbContext.Product.ToListAsync();
-
             foreach (var product in productList)
             {
-                //var productModel = new ProductModel
-                //{
-                //    ProductId = product.Id,
-                //    Name = product.Name,
-                //    Description = product.Description,
-                //    Price = product.Price,
-                //    Status = ProductStatus.Instock,
-                //    CreatedTime = Timestamp.FromDateTime(product.CreateTime)
-                //};
-
                 var productModel = _mapper.Map<ProductModel>(product);
-
                 await responseStream.WriteAsync(productModel);
             }
         }
