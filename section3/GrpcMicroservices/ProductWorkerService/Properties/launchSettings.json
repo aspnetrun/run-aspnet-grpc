@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "ProductWorkerService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
