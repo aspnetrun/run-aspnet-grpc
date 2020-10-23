@@ -11,6 +11,29 @@ namespace ProductGrpcClient
 {
     class Program
     {
+        static async Task Main(string[] args)
+        {
+            // wait for grpc server is running
+            Console.WriteLine("Waiting for server is running");
+            Thread.Sleep(2000);
+
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new ProductProtoService.ProductProtoServiceClient(channel);
+
+            await GetProductAsync(client);
+            await GetAllProducts(client);
+            
+            await AddProductAsync(client);
+            await UpdateProductAsync(client);
+            await DeleteProductAsync(client);
+
+            await GetAllProducts(client);
+            await InsertBulkProduct(client);
+            await GetAllProducts(client);
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
 
         private static async Task GetProductAsync(ProductProtoServiceClient client)
         {
@@ -126,30 +149,6 @@ namespace ProductGrpcClient
             var responseBulk = await clientBulk;
             Console.WriteLine($"Status: {responseBulk.Success}. Insert Count: {responseBulk.InsertCount}");
             Thread.Sleep(1000);
-        }
-
-        static async Task Main(string[] args)
-        {
-            // wait for grpc server is running
-            Console.WriteLine("Waiting for server is running");
-            Thread.Sleep(2000);
-
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            var client = new ProductProtoService.ProductProtoServiceClient(channel);
-
-            await GetProductAsync(client);
-            await GetAllProducts(client);
-            
-            await AddProductAsync(client);
-            await UpdateProductAsync(client);
-            await DeleteProductAsync(client);
-
-            await GetAllProducts(client);
-            await InsertBulkProduct(client);
-            await GetAllProducts(client);
-
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
         }
     }
 }
