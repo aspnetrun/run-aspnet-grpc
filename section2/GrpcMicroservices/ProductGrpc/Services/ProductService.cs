@@ -140,14 +140,15 @@ namespace ProductGrpc.Services
             while (await requestStream.MoveNext())
             {
                 var product = _mapper.Map<Product>(requestStream.Current);
-                _productDbContext.Product.Add(product);    
+                _productDbContext.Product.Add(product);
             }
 
             var insertCount = await _productDbContext.SaveChangesAsync();
 
             var response = new InsertBulkProductResponse
             {
-                Success = insertCount > 0
+                Success = insertCount > 0,
+                InsertCount = insertCount
             };
 
             return response;

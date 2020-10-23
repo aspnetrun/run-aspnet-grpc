@@ -43,7 +43,7 @@ message DeleteProductResponse {
 
 message InsertBulkProductResponse {
   bool success = 1;
-  repeated ProductModel productItems = 2;
+  int32 insertCount = 2;
 }
 
 message ProductModel{

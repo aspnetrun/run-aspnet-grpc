@@ -3,7 +3,6 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using ProductGrpc.Protos;
 using System;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using static ProductGrpc.Protos.ProductProtoService;
@@ -42,8 +41,8 @@ namespace ProductGrpcClient
 
             // GetAllProducts with C# 8
             Console.WriteLine("GetAllProducts with C#8 started...");
-            using var clientData2 = client.GetAllProducts(new GetAllProductsRequest());
-            await foreach (var responseData in clientData2.ResponseStream.ReadAllAsync())
+            using var clientData = client.GetAllProducts(new GetAllProductsRequest());
+            await foreach (var responseData in clientData.ResponseStream.ReadAllAsync())
             {
                 Console.WriteLine(responseData);
             }
@@ -111,12 +110,21 @@ namespace ProductGrpcClient
 
             for (var i = 0; i < 3; i++)
             {
-                await clientBulk.RequestStream.WriteAsync(new ProductModel { Name = $"Product{i}" });
+                var productModel = new ProductModel
+                {
+                    Name = $"Product{i}",
+                    Description = "Bulk inserted product",
+                    Price = 399,
+                    Status = ProductStatus.Instock,
+                    CreatedTime = Timestamp.FromDateTime(DateTime.UtcNow)
+                };
+
+                await clientBulk.RequestStream.WriteAsync(productModel);
             }
             await clientBulk.RequestStream.CompleteAsync();
 
             var responseBulk = await clientBulk;
-            Console.WriteLine($"Status: {responseBulk.Success}. Items: {responseBulk.ProductItems}");            
+            Console.WriteLine($"Status: {responseBulk.Success}. Insert Count: {responseBulk.InsertCount}");
             Thread.Sleep(1000);
         }
 
@@ -137,10 +145,8 @@ namespace ProductGrpcClient
             await DeleteProductAsync(client);
 
             await GetAllProducts(client);
-            
             await InsertBulkProduct(client);
-
-            //await GetAllProducts(client);
+            await GetAllProducts(client);
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
