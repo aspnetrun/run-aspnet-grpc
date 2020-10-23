@@ -23,7 +23,10 @@ namespace ProductGrpc
             services.AddDbContext<ProductsContext>(options =>
                     options.UseInMemoryDatabase("Products"));
 
-            services.AddGrpc();
+            services.AddGrpc(opt =>
+            {
+                opt.EnableDetailedErrors = true;
+            });
 
             services.AddAutoMapper(typeof(Startup));
         }
