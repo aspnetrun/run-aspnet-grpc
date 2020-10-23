@@ -11,7 +11,7 @@ namespace ProductGrpc
         {
             var host = CreateHostBuilder(args).Build();
             SeedDatabase(host);
-            host.Run();            
+            host.Run();
         }
 
         // Additional configuration is required to successfully run gRPC on macOS.
@@ -25,12 +25,10 @@ namespace ProductGrpc
 
         private static void SeedDatabase(IHost host)
         {
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var moviesContext = services.GetRequiredService<ProductsContext>();
-                ProductsContextSeed.SeedAsync(moviesContext);
-            }
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            var moviesContext = services.GetRequiredService<ProductsContext>();
+            ProductsContextSeed.SeedAsync(moviesContext);
         }
     }
 }
