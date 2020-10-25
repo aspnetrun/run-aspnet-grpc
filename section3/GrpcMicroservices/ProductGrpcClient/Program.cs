@@ -127,7 +127,7 @@ namespace ProductGrpcClient
         }
         private static async Task InsertBulkProduct(ProductProtoServiceClient client)
         {
-            // InsertBulkProduct
+            // InsertBulkProduct - Client Stream
             Console.WriteLine("InsertBulkProduct started...");
             using var clientBulk = client.InsertBulkProduct();
 

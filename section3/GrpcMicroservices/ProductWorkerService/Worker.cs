@@ -14,41 +14,27 @@ namespace ProductWorkerService
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly IConfiguration _config;
-        private ProductProtoService.ProductProtoServiceClient _client = null;
+        private readonly IConfiguration _config;        
 
         public Worker(ILogger<Worker> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;            
-        }
-
-        public ProductProtoService.ProductProtoServiceClient Client 
-        { 
-            get
-            {
-                if (null == _client)
-                {
-                    using var channel = GrpcChannel.ForAddress(_config.GetValue<string>("WorkerService:ServerUrl"));
-                    _client = new ProductProtoService.ProductProtoServiceClient(channel);
-                }
-
-                return _client;
-            }
-        }
+        }       
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            Thread.Sleep(2000);
-
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
                 try
                 {
+                    using var channel = GrpcChannel.ForAddress(_config.GetValue<string>("WorkerService:ServerUrl"));
+                    var client = new ProductProtoService.ProductProtoServiceClient(channel);
+
                     Console.WriteLine("GetProductAsync started...");
-                    var response = await Client.GetProductAsync(
+                    var response = await client.GetProductAsync(
                                         new GetProductRequest
                                         {
                                             ProductId = 1
@@ -59,7 +45,7 @@ namespace ProductWorkerService
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception.Message);
-                }                                
+                }       
 
                 await Task.Delay(_config.GetValue<int>("WorkerService:TaskInterval"), stoppingToken);
             }
