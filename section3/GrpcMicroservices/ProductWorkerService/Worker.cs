@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -33,14 +34,24 @@ namespace ProductWorkerService
                     using var channel = GrpcChannel.ForAddress(_config.GetValue<string>("WorkerService:ServerUrl"));
                     var client = new ProductProtoService.ProductProtoServiceClient(channel);
 
-                    Console.WriteLine("GetProductAsync started...");
-                    var response = await client.GetProductAsync(
-                                        new GetProductRequest
+                    // AddProductAsync
+                    Console.WriteLine("AddProductAsync started...");
+                    var addProductResponse = await client.AddProductAsync(
+                                        new AddProductRequest
                                         {
-                                            ProductId = 1
+                                            Product = new ProductModel
+                                            {
+                                                Name = _config.GetValue<string>("WorkerService:ProductName") + DateTimeOffset.Now,
+                                                Description = "New Red Phone Mi10T",
+                                                Price = 699,
+                                                Status = ProductStatus.Instock,
+                                                CreatedTime = Timestamp.FromDateTime(DateTime.UtcNow)
+                                            }
                                         });
 
-                    Console.WriteLine("GetProductAsync Response: " + response.ToString());
+                    Console.WriteLine("AddProduct Response: " + addProductResponse.ToString());
+                    Thread.Sleep(1000);
+
                 }
                 catch (Exception exception)
                 {
