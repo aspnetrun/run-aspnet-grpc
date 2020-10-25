@@ -16,11 +16,13 @@ namespace ProductWorkerService
     {
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _config;
+        private readonly ProductFactory _factory;
 
-        public Worker(ILogger<Worker> logger, IConfiguration config)
+        public Worker(ILogger<Worker> logger, IConfiguration config, ProductFactory factory)
         {
-            _logger = logger;
-            _config = config;            
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -28,35 +30,23 @@ namespace ProductWorkerService
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
+                
                 try
                 {
                     using var channel = GrpcChannel.ForAddress(_config.GetValue<string>("WorkerService:ServerUrl"));
                     var client = new ProductProtoService.ProductProtoServiceClient(channel);
 
-                    // AddProductAsync
-                    Console.WriteLine("AddProductAsync started...");
-                    var addProductResponse = await client.AddProductAsync(
-                                        new AddProductRequest
-                                        {
-                                            Product = new ProductModel
-                                            {
-                                                Name = _config.GetValue<string>("WorkerService:ProductName") + DateTimeOffset.Now,
-                                                Description = "New Red Phone Mi10T",
-                                                Price = 699,
-                                                Status = ProductStatus.Instock,
-                                                CreatedTime = Timestamp.FromDateTime(DateTime.UtcNow)
-                                            }
-                                        });
-
-                    Console.WriteLine("AddProduct Response: " + addProductResponse.ToString());
+                    _logger.LogInformation("AddProductAsync started..");                    
+                    var addProductResponse = await client.AddProductAsync(await _factory.Generate());
+                    _logger.LogInformation("AddProduct Response: {product}", addProductResponse.ToString());
                     Thread.Sleep(1000);
 
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine(exception.Message);
-                }       
+                    _logger.LogError(exception.Message);
+                    throw exception;
+                }
 
                 await Task.Delay(_config.GetValue<int>("WorkerService:TaskInterval"), stoppingToken);
             }
