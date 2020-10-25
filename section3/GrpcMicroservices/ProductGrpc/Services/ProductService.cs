@@ -60,7 +60,7 @@ namespace ProductGrpc.Services
             _productDbContext.Product.Add(product);
             await _productDbContext.SaveChangesAsync();
 
-            _logger.LogInformation("Product successfully added : {product}", product.Name.ToString());
+            _logger.LogInformation("Product successfully added : {productId}_{productName}", product.ProductId, product.Name);
 
             var productModel = _mapper.Map<ProductModel>(product);
             return productModel;
