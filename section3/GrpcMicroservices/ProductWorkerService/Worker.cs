@@ -39,8 +39,6 @@ namespace ProductWorkerService
                     _logger.LogInformation("AddProductAsync started..");                    
                     var addProductResponse = await client.AddProductAsync(await _factory.Generate());
                     _logger.LogInformation("AddProduct Response: {product}", addProductResponse.ToString());
-                    Thread.Sleep(1000);
-
                 }
                 catch (Exception exception)
                 {
