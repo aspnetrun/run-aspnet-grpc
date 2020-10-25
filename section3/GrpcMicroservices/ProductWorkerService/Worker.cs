@@ -15,13 +15,13 @@ namespace ProductWorkerService
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly IConfiguration _config;        
+        private readonly IConfiguration _config;
 
         public Worker(ILogger<Worker> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;            
-        }       
+        }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
