@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductWorkerService", "Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartGrpc", "ShoppingCartGrpc\ShoppingCartGrpc.csproj", "{FC54986A-1166-4B49-8ECA-1B2463AD28AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{7432D8D5-3438-4AA3-85AF-DD341B589E76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShoppingCart", "ShoppingCart", "{7D9A4B40-8466-49D4-AB6E-90336D4A5830}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC66ECF5-E390-49C9-8F6A-0F8FF8E056BA} = {7432D8D5-3438-4AA3-85AF-DD341B589E76}
+		{B48E1E8D-3F9D-4359-81A0-9A03CFA2A546} = {7432D8D5-3438-4AA3-85AF-DD341B589E76}
+		{84D01E31-DDE9-4453-8CE2-96E575490E26} = {7432D8D5-3438-4AA3-85AF-DD341B589E76}
+		{FC54986A-1166-4B49-8ECA-1B2463AD28AE} = {7D9A4B40-8466-49D4-AB6E-90336D4A5830}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50411588-D804-4C5B-9AAE-B044E7113E72}
