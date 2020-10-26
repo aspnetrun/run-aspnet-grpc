@@ -27,8 +27,8 @@ namespace ProductGrpc
         {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-            var moviesContext = services.GetRequiredService<ProductsContext>();
-            ProductsContextSeed.SeedAsync(moviesContext);
+            var productsContext = services.GetRequiredService<ProductsContext>();
+            ProductsContextSeed.SeedAsync(productsContext);
         }
     }
 }

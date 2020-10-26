@@ -13,7 +13,7 @@ namespace ShoppingCartGrpc.Services
     public class ShoppingCartService : ShoppingCartProtoService.ShoppingCartProtoServiceBase
     {
         private readonly ShoppingCartContext _shoppingCartDbContext;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         private readonly ILogger<ShoppingCartService> _logger;
 
         public ShoppingCartService(ShoppingCartContext shoppingCartDbContext, ILogger<ShoppingCartService> logger)
