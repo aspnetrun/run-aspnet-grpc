@@ -6,24 +6,33 @@ service ShoppingCartProtoService {
 
   rpc GetShoppingCart (GetShoppingCartRequest) returns (ShoppingCartModel);
 
-  rpc AddShoppingCart (stream ShoppingCartModel) returns (AddShoppingCartResponse);
-  rpc RemoveShoppingCart (RemoveShoppingCartRequest) returns (RemoveShoppingCartResponse);
+  rpc CreateShoppingCart (ShoppingCartModel) returns (ShoppingCartModel);
+  
+  rpc AddItemIntoShoppingCart (stream AddItemIntoShoppingCartRequest) returns (AddItemIntoShoppingCartResponse);
+  rpc RemoveItemIntoShoppingCart (RemoveItemIntoShoppingCartRequest) returns (RemoveItemIntoShoppingCartResponse);
 }
 
 message GetShoppingCartRequest {
   string username = 1;
 }
 
-message AddShoppingCartResponse{
+message AddItemIntoShoppingCartRequest{
+  string username = 1;
+  string discountCode = 2;
+  ShoppingCartItemModel newCartItem = 3;
+}
+
+message AddItemIntoShoppingCartResponse{
   bool success = 1;
   int32 insertCount = 2;
 }
 
-message RemoveShoppingCartRequest {
+message RemoveItemIntoShoppingCartRequest {
   string username = 1;
+  ShoppingCartItemModel removeCartItem = 2;
 }
 
-message RemoveShoppingCartResponse {
+message RemoveItemIntoShoppingCartResponse {
   bool success = 1;
 }
 
