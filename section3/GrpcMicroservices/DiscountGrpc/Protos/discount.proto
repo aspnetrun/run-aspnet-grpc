@@ -7,7 +7,7 @@ service DiscountProtoService {
 }
 
 message GetDiscountRequest {
-  int32 discountCode = 1;
+  string discountCode = 1;
 }
 
 message DiscountModel{

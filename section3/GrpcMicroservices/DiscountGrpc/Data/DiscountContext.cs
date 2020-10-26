@@ -1,18 +1,15 @@
 ﻿using DiscountGrpc.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DiscountGrpc.Data
 {
-    public class DiscountContext
+    public static class DiscountContext
     {
-        public DiscountContext()
+        public static readonly List<Discount> Discounts = new List<Discount>
         {
-
-        }
-
-        public List<Discount> Discount { get; set; }
+            new Discount{DiscountId = 1, Code = "CODE_X", Amount = 10 },
+            new Discount{DiscountId = 1, Code = "CODE_Y", Amount = 20 },
+            new Discount{DiscountId = 1, Code = "CODE_Z", Amount = 30 }
+        };
     }
 }
