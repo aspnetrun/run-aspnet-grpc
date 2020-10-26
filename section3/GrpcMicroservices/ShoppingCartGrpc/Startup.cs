@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShoppingCartGrpc.Services;
 
 namespace ShoppingCartGrpc
 {
@@ -31,7 +32,7 @@ namespace ShoppingCartGrpc
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapGrpcService<GreeterService>();                
+                endpoints.MapGrpcService<ShoppingCartService>();
 
                 endpoints.MapGet("/", async context =>
                 {
