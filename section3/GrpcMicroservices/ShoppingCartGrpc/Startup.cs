@@ -41,6 +41,8 @@ namespace ShoppingCartGrpc
 
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
                 (o => o.Address = new Uri(Configuration["GrpcConfigs:DiscountUrl"]));
+
+            services.AddScoped<DiscountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
