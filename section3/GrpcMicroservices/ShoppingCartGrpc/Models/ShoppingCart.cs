@@ -2,16 +2,16 @@
 
 namespace ShoppingCartGrpc.Models
 {
-    public class Cart
+    public class ShoppingCart
     {
         public string UserName { get; set; }
-        public List<CartItem> Items { get; set; } = new List<CartItem>();
+        public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
 
-        public Cart()
+        public ShoppingCart()
         {
         }
 
-        public Cart(string userName)
+        public ShoppingCart(string userName)
         {
             UserName = userName;
         }

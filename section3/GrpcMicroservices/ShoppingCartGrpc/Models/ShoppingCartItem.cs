@@ -1,6 +1,6 @@
 ﻿namespace ShoppingCartGrpc.Models
 {
-    public class CartItem
+    public class ShoppingCartItem
     {
         public int Quantity { get; set; }
         public string Color { get; set; }
