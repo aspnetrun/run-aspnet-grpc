@@ -80,7 +80,7 @@ namespace ShoppingCartGrpc.Services
                 }
                 else
                 {
-                    // check discount and set the item price
+                    // check discount and set the item price --call discount grpc microservice
                     // newAddedCartItem.Price*0.90
                     shoppingCart.Items.Add(newAddedCartItem);
                 }          
