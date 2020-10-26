@@ -16,11 +16,11 @@ namespace ShoppingCartGrpc.Models
             UserName = userName;
         }
 
-        public decimal TotalPrice
+        public float TotalPrice
         {
             get
             {
-                decimal totalprice = 0;
+                float totalprice = 0;
                 foreach (var item in Items)
                 {
                     totalprice += item.Price * item.Quantity;
