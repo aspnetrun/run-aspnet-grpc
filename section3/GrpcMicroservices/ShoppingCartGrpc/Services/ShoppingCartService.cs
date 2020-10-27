@@ -83,7 +83,7 @@ namespace ShoppingCartGrpc.Services
                 }
                 else
                 {
-                    // check discount and set the item price --call discount grpc microservice                    
+                    // GRPC CALL DISCOUNT SERVICE -- check discount and set the item price
                     var discount = await _discountService.GetDiscount(requestStream.Current.DiscountCode);
                     newAddedCartItem.Price -= discount.Amount;
 
