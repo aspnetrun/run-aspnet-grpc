@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "ShoppingCartWorkerService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
