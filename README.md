@@ -32,3 +32,13 @@ Also, we are going to develop centralized standalone Authentication Server with 
 Identity Server4 is an open source framework which implements OpenId Connect and OAuth2 protocols for .Net Core.
 With IdentityServer, we can provide protect our SC gRPC services with OAuth 2.0 and JWT tokens. SC Worker will get the token before send request to SC Grpc server application.
 
+## Installation
+Follow these steps to get your development environment set up:
+1. Check All projects run profiles. One by one Right Click the project file, open Properties window and check the debug section. Launh Profile should be the "Project" and App URLs should be the same as big picture.
+2. For all projects, one by one, Set a Startup project and see the Run profile on the Run button. Change the default running profile to IIS Express to Project name.
+3. Multiple startup projects. Right click the solution, open Properties, and set Multiple startup project and Start **only gRPC server applications** click apply and ok.
+4. Start Worker Service applications one by one. You can go to location of ProductServiceWorker and ShoppingCartServiceWorker project location and run cmd on that location. After that you can write **dotnet run** command and see the logs for all project console windows.
+
+You will see project console windows and you can follow the logs according to big picture. Also you can see the running video on udemy introduction video;
+
+**UDEMY COURSE WITH DISCOUNTED - Step by Step Development of this repository -> https://www.udemy.com/course/using-grpc-in-microservices-communication-with-net-5/?referralCode=58488D38B3C39FBA0D70**
