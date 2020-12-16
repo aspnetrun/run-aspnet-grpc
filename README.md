@@ -13,7 +13,7 @@ We will use Worker Services and Asp.Net 5 Grpc applications to build client and 
 Basically we will implement e-commerce logic with only gRPC communication. We will have 3 gRPC server applications which are Product — ShoppingCart and Discount gRPC services. And we will have 2 worker services which are Product and ShoppingCart Worker Service. Worker services will be client and perform operations over the gRPC server applications. And we will secure the gRPC services with standalone Identity Server microservices with OAuth 2.0 and JWT token.
 
 ### ProductGrpc Server Application
-First of all, we are going to develop ProductGrpc project. This will be Asp.Net gRPC server web application and expose apis for Product CRUD operations.
+First of all, we are going to develop ProductGrpc project. This will be Asp.Net gRPC Server Web Application and expose apis for Product CRUD operations.
 
 ### Product Worker Service
 After that, we are going to develop Product Worker Service project for consuming ProductGrpc services. This product worker service project will be the client of ProductGrpc application and generate products and insert bulk product records into Product database by using client streaming gRPC proto services of ProductGrpc application. This operation will be in a time interval and looping as a service application.
