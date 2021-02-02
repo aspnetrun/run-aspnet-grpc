@@ -39,6 +39,3 @@ Follow these steps to get your development environment set up:
 3. Multiple startup projects. Right click the solution, open Properties, and set Multiple startup project and Start **only gRPC server applications** click apply and ok.
 4. Start Worker Service applications one by one. You can go to location of ProductServiceWorker and ShoppingCartServiceWorker project location and run cmd on that location. After that you can write **dotnet run** command and see the logs for all project in console windows.
 
-You will see project console windows and you can follow the logs according to big picture. Also you can see the running video on udemy introduction video;
-
-**UDEMY COURSE WITH DISCOUNTED - Step by Step Development of this repository -> https://www.udemy.com/course/using-grpc-in-microservices-communication-with-net-5/?referralCode=58488D38B3C39FBA0D70**
